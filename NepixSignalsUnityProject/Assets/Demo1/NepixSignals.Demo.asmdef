@@ -1,0 +1,15 @@
+{
+    "name": "NepixSignals.Demo",
+    "references": [
+        "GUID:473146d7b1a90ab42813d5d25d92f612"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
