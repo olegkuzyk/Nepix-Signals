@@ -17,6 +17,7 @@ Use one hub per scene or per level, than when you restart scene or level you hav
 
 </details>
 
+---
 
 Than create some signal types:
 ```c#
@@ -58,6 +59,8 @@ public static class Sgnls
 }
 ```
 </details>
+
+---
 
 Lastly, add listeners:
 ```c#
