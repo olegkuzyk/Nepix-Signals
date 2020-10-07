@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using NepixSignals.Api;
 using UnityEngine.Assertions;
 
@@ -10,7 +12,7 @@ namespace NepixSignals
         {
             private ABaseSignal<T> _signal;
             
-            private Func<bool> _whenPredicate;
+            private List<Func<bool>> _whenPredicate;
             
             /// <summary>
             /// Handler method that should be called.
@@ -42,7 +44,7 @@ namespace NepixSignals
             /// <param name="signal">New signal. Warning: Call On to signal you have to manually.</param>
             internal void Reset(ABaseSignal<T> signal, T handler)
             {
-                Assert.IsNull(signal, "Signal can't be null");
+                Assert.IsNotNull(signal, "Signal can't be null");
                 
                 if (_signal != null) Off();
                 _signal = signal;
@@ -92,8 +94,9 @@ namespace NepixSignals
             /// <param name="predicate">When predicate</param>
             /// <returns>Callback</returns>
             public ISignalCallback When(Func<bool> predicate) 
-            { 
-                _whenPredicate = predicate;
+            {
+                if (_whenPredicate == null) _whenPredicate = new List<Func<bool>>();
+                _whenPredicate.Add(predicate);
                 return this;
             }
 
@@ -121,7 +124,7 @@ namespace NepixSignals
                 countdown = value;
                 return this;
             }
-            
+
             /// <summary>
             /// Check is when predicate fulfilled.
             /// If the predicate is null that fulfilled.
@@ -129,7 +132,7 @@ namespace NepixSignals
             /// <returns>Callback</returns>
             private bool IsWhenFulfilled()
             {
-                return _whenPredicate == null || _whenPredicate();
+                return _whenPredicate == null || _whenPredicate.All(when => when());
             }
             
             private bool IsCountdownFulfilled()
