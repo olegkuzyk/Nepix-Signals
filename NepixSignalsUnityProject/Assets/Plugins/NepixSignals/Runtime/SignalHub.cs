@@ -22,9 +22,8 @@ namespace NepixSignals
         public SType Get<SType>() where SType : ISignal, new()
         {
             Type signalType = typeof(SType);
-            ISignal signal;
 
-            if (signals.TryGetValue (signalType, out signal)) 
+            if (signals.TryGetValue (signalType, out var signal)) 
             {
                 return (SType)signal;
             }
@@ -102,10 +101,9 @@ namespace NepixSignals
 
         private ISignal Bind(Type signalType)
         {
-            ISignal signal;
-            if (signals.TryGetValue(signalType, out signal))
+            if (signals.TryGetValue(signalType, out var signal))
             {
-                Debug.LogError(string.Format("Signal already registered for type {0}", signalType.ToString()));
+                Debug.LogError($"Signal already registered for type {signalType}");
                 return signal;
             }
 
