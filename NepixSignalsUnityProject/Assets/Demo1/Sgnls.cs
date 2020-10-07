@@ -1,5 +1,6 @@
 
 using NepixSignals;
+using UnityEngine.UI;
 
 #pragma warning disable 0649
 namespace Demo1
