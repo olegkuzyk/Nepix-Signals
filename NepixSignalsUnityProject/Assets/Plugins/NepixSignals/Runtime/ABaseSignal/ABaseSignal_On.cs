@@ -79,8 +79,6 @@ namespace NepixSignals
         /// <param name="isOn">Whether ON or OFF the handler</param>
         /// <param name="handler">Method to be called when signal is fired</param>
         /// <param name="single">Must contains only one instance of handler</param>
-        /// <param name="priority">Priority of the handler. The higher it is the sooner handler will shot.</param>
-        /// <param name="dispatchAmount">How many times listener should be notidied.</param>
         public ISignalCallback On(bool isOn, T handler, bool single)
         {
             return isOn ? On(handler, single) : Off(handler);

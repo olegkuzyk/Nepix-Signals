@@ -31,6 +31,13 @@ namespace NepixSignals.Api
             void On();
 
             /// <summary>
+            /// Once again the callback to signal, in case it was off.
+            /// Warning: exception could be fired
+            /// if signal already has this callback.
+            /// </summary>
+            void Once();
+
+            /// <summary>
             /// Off from signal.
             /// </summary>
             void Off();

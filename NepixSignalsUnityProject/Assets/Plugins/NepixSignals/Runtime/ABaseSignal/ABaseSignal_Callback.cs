@@ -61,6 +61,8 @@ namespace NepixSignals
             /// </summary>
             public void On() => _signal.On(this);
             
+            public void Once() => _signal.Once(this);
+            
             /// <summary>
             /// Off from signal.
             /// </summary>
