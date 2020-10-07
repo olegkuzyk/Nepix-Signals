@@ -7,6 +7,7 @@ namespace Demo1
     public class NepixSignalsDemo : MonoBehaviour
     {
         private Player _player;
+        private ISignalCallback _playerDamageCallback;
         private void Start()
         {
             // Create some hubs.
@@ -21,12 +22,13 @@ namespace Demo1
             
             // Listen signals via hub1
             hub1.Get<Sgnls.PlayerSignals.Jump>()
-                .On(OnPlayerJump)
+                .On(OnPlayerJump) // Set handler
                 .Countdown(3) // How many times handler (OnPlayerJump) will be called.
                 .Priority(1000) // Priority of handler (OnPlayerJump) in queue.
                 .When(() => _player.health >= 50); // Condition in which handler will be called.
 
-            ISignalCallback playerDamageCallback = hub1.Get<Sgnls.PlayerSignals.Damage>().On(damage =>
+            // Sometime very handy to listen signal only once.
+            _playerDamageCallback = hub1.Get<Sgnls.PlayerSignals.Damage>().Once(damage =>
             {
                 Debug.Log($"Update player's health bar: health {_player.health} / 100");
             });
@@ -45,12 +47,12 @@ namespace Demo1
             {
                 _player.Damage(10);
             }
-            
         }
 
         private void OnPlayerJump()
         {
-            Debug.Log("We ");
+            // Add 10 coins every time player jumps
+            _player.coins += 10;
         }
     }
 }

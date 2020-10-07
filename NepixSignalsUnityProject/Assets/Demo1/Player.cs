@@ -14,6 +14,7 @@ namespace Demo1
         private float _health;
 
         public float health => _health;
+        public float coins;
         
         public Player(SignalHub hub)
         {
