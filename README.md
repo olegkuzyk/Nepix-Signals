@@ -5,7 +5,7 @@ Based on [Signals by Yanko Oliveira](https://github.com/yankooliveira/signals).
 Inspired by [UniRx](https://github.com/neuecc/UniRx) chain-calls and [signal-js](https://www.npmjs.com/package/signal-js) with its on/once/off/ methods.
 
 ### Usage:
-First, lets create a hub, that will hold all our signals.
+First, lets create a hub, that will hold all signals:
 
 ```c#
 SignalHub hub = new SignalHub();
@@ -59,9 +59,11 @@ public static class Sgnls
 ```
 </details>
 
-Lastly, add listener.
+Lastly, add listeners:
 ```c#
 hub.Get<PlayerJump>().On(OnPlayerJump);
+hub.Get<PlayerDamage>().On(OnPlayerDamage);
+hub.Get<PlayerDied>().On(OnPlayerDied);
 ```
 <details><summary>Pro Tip :sunglasses:</summary>
 
