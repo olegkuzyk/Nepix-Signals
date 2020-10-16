@@ -156,7 +156,7 @@ __handler__ Has handler in any callback.
 #### ISignalCallback
 
 ```c#
-int priority { get; }
+int priority;
 ```
 
 Priority of callback.
@@ -164,7 +164,7 @@ Priority of callback.
 ---
 
 ```c#
-int countdown { get; }
+int countdown;
 ```
 
 How many times left to call before remove.
