@@ -82,6 +82,9 @@ hub.Get<Sgnls.PlayerSignals.Jump>()
 
 </details>
 
+---
+---
+
 
 ### Basic API:
 #### ASignal
