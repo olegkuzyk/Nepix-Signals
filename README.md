@@ -219,7 +219,8 @@ ISignalCallback Priority(int value);
 ```
 
 Set priority of callback.
-__value__ Priority
+
+__value__ Priority.
 
 ---
 
@@ -230,5 +231,6 @@ ISignalCallback Countdown(int value);
 Set countdown for callback.
 How many times it should be called.
 Negative value means infinite calls amount.
+
 __value__ Countdown amount.
 
