@@ -11,7 +11,6 @@ namespace NepixSignals
     /// </summary>
     public abstract partial class ABaseSignal<T> : ISignal
     {
-        private readonly List<Callback> _pool = new List<Callback>();
         private readonly List<Callback> _callbacks = new List<Callback>();
         private readonly List<Callback> _toRemove = new List<Callback>();
         private readonly List<Action> _callAfterDispatch = new List<Action>();
