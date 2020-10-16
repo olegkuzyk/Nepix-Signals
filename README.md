@@ -87,7 +87,7 @@ hub.Get<Sgnls.PlayerSignals.Jump>()
 #### ASignal
 
 ```c#
-On(T handler, bool single)
+ISignalCallback On(T handler, bool single);
 ``` 
 Adds a listener to this Signal. 
 
@@ -98,7 +98,7 @@ __single__ Must contains only one instance of handler
 ---
 
 ```c#
-On(bool isOn, T handler)
+ISignalCallback On(bool isOn, T handler);
 ```
 
 Adds a listener to this Signal
@@ -110,7 +110,7 @@ __handler__ Method to be called when signal is fired
 ---
 
 ```c#
-Once(T handler)
+ISignalCallback Once(T handler);
 ```
 
 Adds a listener to this Signal. This will fire once and than will be removed.
@@ -120,7 +120,7 @@ __handler__ Method to be called when signal is fired
 ---
 
 ```c#
-Off(T handler)
+ISignalCallback Off(T handler);
 ```
 
 Removes a listener from this Signal. If was added multiple times the same handler that all of its instances will be removed. If you need to remove specific callback than do it via ISignalCallback.Off()
@@ -130,7 +130,7 @@ __handler__ Method to be unregistered from signal
 ---
 
 ```c#
-OffAll()
+void OffAll();
 ```
 
 Remove all listeners.
@@ -138,7 +138,7 @@ Remove all listeners.
 ---
 
 ```c#
-Sort()
+void Sort();
 ```
 
 Sort callbacks by priority.
@@ -146,7 +146,7 @@ Sort callbacks by priority.
 ---
 
 ```c#
-Has(T handler)
+bool Has(T handler);
 ```
 
 __handler__ Has handler in any callback.
@@ -162,57 +162,72 @@ Priority of callback.
 
 ---
 
-/// <summary>
-/// How many times it should be called.
-/// Negative value means infinite calls amount.
-/// </summary>
+```c#
 int countdown { get; }
+```
 
-/// <summary>
-/// Check if callback added to a signal.
-/// </summary>
-/// <returns></returns>
+How many times it should be called.
+Negative value means infinite calls amount.
+
+---
+
+```c#
 bool IsAddedToSignal();
+```
 
-/// <summary>
-/// On again the callback to signal, in case it was off.
-/// Warning: exception could be fired
-/// if signal already has this callback.
-/// </summary>
+Check if callback added to a signal.
+
+---
+
+```c#
 void On();
+```
 
-/// <summary>
-/// Once again the callback to signal, in case it was off.
-/// Warning: exception could be fired
-/// if signal already has this callback.
-/// </summary>
+On again the callback to signal, in case it was off. __Warning:__ exception could be fired if signal already has this callback.
+
+---
+
+```c#
 void Once();
+```
 
-/// <summary>
-/// Off from signal.
-/// </summary>
+Once again the callback to signal, in case it was off. __Warning:__ exception could be fired if signal already has this callback.
+
+---
+
+```c#
 void Off();
+```
 
-/// <summary>
-/// The handler will be called only when predicate fulfilled.
-/// </summary>
-/// <param name="predicate">When predicate</param>
-/// <returns>Callback</returns>
+Off from signal.
+
+---
+
+```c#
 ISignalCallback When(Func<bool> predicate);
+```
 
-/// <summary>
-/// Set priority of callback.
-/// </summary>
-/// <param name="value"></param>
-/// <returns></returns>
+The handler will be called only when predicate fulfilled.
+
+__predicate__ When predicate.
+
+---
+
+```c#
 ISignalCallback Priority(int value);
+```
 
-/// <summary>
-/// Set countdown for callback.
-        /// How many times it should be called.
-        /// Negative value means infinite calls amount.
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        ISignalCallback Countdown(int value);
+Set priority of callback.
+__value__ Priority
+
+---
+
+```c#
+ISignalCallback Countdown(int value);
+```
+
+Set countdown for callback.
+How many times it should be called.
+Negative value means infinite calls amount.
+__value__ Countdown amount.
 
