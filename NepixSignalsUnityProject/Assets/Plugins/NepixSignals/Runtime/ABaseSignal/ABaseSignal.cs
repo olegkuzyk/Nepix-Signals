@@ -108,11 +108,11 @@ namespace NepixSignals
                 
                 _callbacks.ForEach(callback =>
                 {
-                    if (callback.CanFire())
+                    if (callback.CanEmit())
                     {
-                        callback.FireStart();
+                        callback.EmitStart();
                         externalDispatch.Invoke(callback);
-                        callback.FireEnd();
+                        callback.EmitEnd();
                     }
                 });
             }

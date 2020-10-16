@@ -27,26 +27,19 @@ namespace NepixSignals
             public int priority { get; private set; }
             
             /// <summary>
-            /// How many times it should be called.
+            /// How many times left to call before remove.
             /// Negative value means infinite calls amount.
             /// </summary>
-            public int countdown { get; private set; } = -1;
+            public int countdown { get; private set; }
 
             /// <summary>
             /// Ctor
             /// </summary>
             /// <param name="signal"></param>
-            public Callback(ABaseSignal<T> signal, T handler) => Reset(signal, handler);
-            
-            /// <summary>
-            /// Reset all data in callback.
-            /// </summary>
-            /// <param name="signal">New signal. Warning: Call On to signal you have to manually.</param>
-            internal void Reset(ABaseSignal<T> signal, T handler)
+            internal Callback(ABaseSignal<T> signal, T handler)
             {
                 Assert.IsNotNull(signal, "Signal can't be null");
                 
-                if (_signal != null) Off();
                 _signal = signal;
                 this.handler = handler;
                 _whenPredicate = null;
@@ -74,13 +67,13 @@ namespace NepixSignals
             /// Combine of all checkups
             /// </summary>
             /// <returns></returns>
-            internal bool CanFire() => IsWhenFulfilled() && IsCountdownFulfilled();
+            internal bool CanEmit() => IsWhenFulfilled() && IsCountdownFulfilled();
 
-            internal void FireStart()
+            internal void EmitStart()
             {
                 // For future...
             }
-            internal void FireEnd()
+            internal void EmitEnd()
             {
                 // Countdown only for callbacks that greater 0
                 // Callbacks with 0 are completed
