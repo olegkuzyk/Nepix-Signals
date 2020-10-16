@@ -158,6 +158,7 @@ __handler__ Has handler in any callback.
 ```c#
 int priority { get; }
 ```
+
 Priority of callback.
 
 ---
@@ -166,7 +167,7 @@ Priority of callback.
 int countdown { get; }
 ```
 
-How many times it should be called.
+How many times left to call before remove.
 Negative value means infinite calls amount.
 
 ---
