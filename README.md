@@ -81,3 +81,138 @@ hub.Get<Sgnls.PlayerSignals.Jump>()
 ```
 
 </details>
+
+
+### Basic API:
+#### ASignal
+
+```c#
+On(T handler, bool single)
+``` 
+Adds a listener to this Signal. 
+
+__handler__ Method to be called when signal is fired.
+
+__single__ Must contains only one instance of handler
+
+---
+
+```c#
+On(bool isOn, T handler)
+```
+
+Adds a listener to this Signal
+
+__isOn__ Whether ON or OFF the handler
+
+__handler__ Method to be called when signal is fired
+
+---
+
+```c#
+Once(T handler)
+```
+
+Adds a listener to this Signal. This will fire once and than will be removed.
+
+__handler__ Method to be called when signal is fired
+
+---
+
+```c#
+Off(T handler)
+```
+
+Removes a listener from this Signal. If was added multiple times the same handler that all of its instances will be removed. If you need to remove specific callback than do it via ISignalCallback.Off()
+
+__handler__ Method to be unregistered from signal
+
+---
+
+```c#
+OffAll()
+```
+
+Remove all listeners.
+
+---
+
+```c#
+Sort()
+```
+
+Sort callbacks by priority.
+
+---
+
+```c#
+Has(T handler)
+```
+
+__handler__ Has handler in any callback.
+
+---
+
+#### ISignalCallback
+
+```c#
+int priority { get; }
+```
+Priority of callback.
+
+---
+
+/// <summary>
+/// How many times it should be called.
+/// Negative value means infinite calls amount.
+/// </summary>
+int countdown { get; }
+
+/// <summary>
+/// Check if callback added to a signal.
+/// </summary>
+/// <returns></returns>
+bool IsAddedToSignal();
+
+/// <summary>
+/// On again the callback to signal, in case it was off.
+/// Warning: exception could be fired
+/// if signal already has this callback.
+/// </summary>
+void On();
+
+/// <summary>
+/// Once again the callback to signal, in case it was off.
+/// Warning: exception could be fired
+/// if signal already has this callback.
+/// </summary>
+void Once();
+
+/// <summary>
+/// Off from signal.
+/// </summary>
+void Off();
+
+/// <summary>
+/// The handler will be called only when predicate fulfilled.
+/// </summary>
+/// <param name="predicate">When predicate</param>
+/// <returns>Callback</returns>
+ISignalCallback When(Func<bool> predicate);
+
+/// <summary>
+/// Set priority of callback.
+/// </summary>
+/// <param name="value"></param>
+/// <returns></returns>
+ISignalCallback Priority(int value);
+
+/// <summary>
+/// Set countdown for callback.
+        /// How many times it should be called.
+        /// Negative value means infinite calls amount.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        ISignalCallback Countdown(int value);
+
