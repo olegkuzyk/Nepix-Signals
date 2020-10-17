@@ -236,3 +236,19 @@ Negative value means infinite calls amount.
 
 __value__ Countdown amount.
 
+### Extra
+
+#### Physics Contact Listeners
+
+Handulf extensions for ___GameObject___.
+
+```c#
+gameObject.AddCollisionEnterSignal().On(contact => Debug.Log(contact));
+gameObject.AddCollisionStaySignal().On(contact => Debug.Log(contact));
+gameObject.AddCollisionExitSignal().On(contact => Debug.Log(contact));
+
+gameObject.AddTriggerEnterSignal().On(contact => Debug.Log(contact));
+gameObject.AddTriggerStaySignal().On(contact => Debug.Log(contact));
+gameObject.AddTriggerExitSignal().On(contact => Debug.Log(contact));
+```
+
